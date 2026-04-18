@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baptêmes d'Exception | Guiguille Traiteur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;400;700;900&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6B1B01;
+            --secondary: #B82A02;
+            --dark: #030100;
+            --light: #F5F5F5;
+            --white: #ffffff;
+            --grey: #4A4A4A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Heebo', sans-serif; }
+        body { background-color: var(--white); color: var(--dark); line-height: 1.6; }
+
+        header {
+            background: var(--light);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-weight: 900; font-size: 1.6rem; text-transform: uppercase; color: var(--primary); text-decoration: none; }
+        nav a { text-decoration: none; color: var(--dark); margin-left: 25px; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }
+
+        /* --- HERO BAPTÊME --- */
+        .hero-wedding {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80') center/cover fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        }
+        .hero-wedding h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; text-transform: uppercase; }
+        .hero-wedding p { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-top: 10px; }
+
+        .intro { padding: 80px 10%; text-align: center; max-width: 900px; margin: 0 auto; }
+        .intro h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; }
+        .intro p { font-size: 1.1rem; color: var(--grey); }
+
+        /* --- FORMULES --- */
+        .formulas { background: var(--light); padding: 80px 5%; }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .formula-card {
+            background: white; border: 1px solid #ddd; transition: 0.3s;
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+        .formula-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--secondary); }
+        
+        .card-img { width: 100%; height: 200px; background-size: cover; background-position: center; }
+        .card-content { padding: 30px; text-align: center; flex-grow: 1; }
+        .formula-card h3 { font-size: 1.4rem; margin-bottom: 20px; text-transform: uppercase; border-bottom: 2px solid var(--primary); padding-bottom: 10px; display: inline-block; }
+        .formula-card ul { list-style: none; margin-bottom: 30px; text-align: left; }
+        .formula-card ul li { margin-bottom: 10px; color: #555; position: relative; padding-left: 20px; }
+        .formula-card ul li::before { content: "•"; color: var(--secondary); position: absolute; left: 0; font-weight: bold; }
+        
+        .price { font-weight: 900; color: var(--primary); font-size: 1.2rem; margin-top: auto; }
+
+        /* --- NOUVELLE SECTION GALERIE --- */
+        .gallery-bapteme { padding: 80px 5%; background: var(--white); text-align: center; }
+        .gallery-bapteme h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; }
+        .gallery-bapteme p.subtitle-gallery { font-size: 1.1rem; color: var(--grey); margin-bottom: 50px; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px; /* Espace réduit entre les images pour un effet moderne */
+        }
+        
+        .gallery-item {
+            overflow: hidden; /* Pour que le zoom reste dans le cadre */
+            border-radius: 5px;
+            aspect-ratio: 4 / 3; /* Toutes les images ont la même proportion */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* L'image remplit le cadre sans se déformer */
+            transition: transform 0.5s ease; /* Animation fluide */
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1); /* Zoom au survol */
+        }
+
+        /* --- CTA BANNER --- */
+        .cta-banner { background: var(--dark); color: white; padding: 60px 5%; text-align: center; }
+        .cta-banner h2 { font-size: 2rem; margin-bottom: 20px; }
+        .btn-gold { 
+            display: inline-block; padding: 15px 40px; background: var(--secondary); color: white; 
+            text-decoration: none; border-radius: 50px; font-weight: 700; text-transform: uppercase; transition: 0.3s;
+        }
+        .btn-gold:hover { background: var(--primary); letter-spacing: 1px; }
+
+        footer { background: var(--dark); color: white; padding: 40px 5%; text-align: center; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero-wedding h1 { font-size: 2.5rem; }
+            .hero-wedding p { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Guiguille <span style="color:var(--dark)">Traiteur</span></a>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero-wedding">
+        <div>
+            <h1>Votre Baptême</h1>
+            <p>Douceur et gourmandise pour un moment unique</p>
+        </div>
+    </section>
+
+    <section class="intro">
+        <h2>Un événement précieux</h2>
+        <p> Parce que le baptême est une étape marquante de la vie de famille, nous vous proposons une cuisine délicate et conviviale. Des buffets colorés aux pièces montées spectaculaires, nous créons l'ambiance parfaite pour célébrer votre enfant. </p>
+    </section>
+
+    <section class="formulas">
+        <div class="formula-grid">
+            
+            <div class="formula-card">
+                <div class="card-img" style="background-image: url('https://www.cocktails-road.fr/images/recipe/2023/05/douceur-d-ete-un-rafraichissement-de-fraise-et-d-orange-sans-alcool.jpg');"></div>
+                <div class="card-content">
+                    <h3>Le Cocktail Douceur</h3>
+                    <ul>
+                        <li>Verrines fraîcheur et mini-quiches</li>
+                        <li>Navettes gourmandes</li>
+                        <li>Assortiment de canapés traiteur</li>
+                        <li>Atelier "Bar à jus frais"</li>
+                    </ul>
+                    
+                </div>
+            </div>
+
+            <div class="formula-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80');"></div>
+                <div class="card-content">
+                    <h3>Le Buffet Champêtre</h3>
+                    <ul>
+                        <li>Grand buffet d'entrées variées</li>
+                        <li>Viandes froides et salades composées</li>
+                        <li>Plateau de fromages de nos régions</li>
+                        <li>Le traditionnel Gâteau de Baptême</li>
+                    </ul>
+                    
+                </div>
+            </div>
+
+            <div class="formula-card">
+                <div class="card-img" style="background-image: url('data:image/jpeg;base64,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');"></div>
+                <div class="card-content">
+                    <h3>Le Goûter de Fête</h3>
+                    <ul>
+                        <li>Candy bar & fontaine à chocolat</li>
+                        <li>Mignardises et macarons</li>
+                        <li>Crêpes et gaufres minute</li>
+                        <li>Boissons chaudes et rafraîchissements</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="gallery-bapteme">
+        <h2>Notre Savoir-Faire en Images</h2>
+        <p class="subtitle-gallery">Découvrez nos réalisations culinaires et nos décorations pour célébrer ce moment unique.</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://www.1001traiteurs.com/images/provider/47439/1753887330_688a32620c156-m.jpg" alt="Pièce montée de baptême">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.lemagducse.com/images/dossiers/2017-03/gouter-noel-114913.jpg" alt="Candy Bar coloré">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images-ca-1-0-1-eu.s3-eu-west-1.amazonaws.com/photos/original/843/dossier_buffets_Fotolia_84856132_S.jpg" alt="Assortiment de macarons">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80" alt="Grand buffet froid traiteur">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.1001traiteurs.com/images/provider/64559/1747041439_6821bc9fe746c-m.jpg" alt="Décoration de table douce">
+            </div>
+            <div class="gallery-item">
+                <img src="https://les3sens-traiteur.fr/wp-content/uploads/2022/10/bapteme-traiteur-Bordeaux-1.png" alt="Plateau de petits fours salés">
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeJdCpRBGdJ7uoP9IAp0WExlDXVUklCDxAxg&s">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.mamie-kocotte.com/public/img/big/image00014jpeg_67a25aa8e9e6b2.63899594.jpeg" alt="Verrines fraîcheur">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.traiteur-auger.fr/photos/1310x983/20220605_104838.jpg" alt="Fontaine à chocolat et fruits">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.traiteurrestaurant-lepetitblanc.fr/ressources/images/Bapteme_369d_lg.jpg" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <h2>Une demande particulière ?</h2>
+        <p style="margin-bottom: 30px; opacity: 0.8;">Nous adaptons nos menus selon vos envies et régimes alimentaires.</p>
+        <a href="#" class="btn-gold">Demander un devis baptême</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Guiguille Traiteur - Spécialiste Baptêmes Pas-de-Calais & Nord</p>
+    </footer>
+
+</body>
+</html>

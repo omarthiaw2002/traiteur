@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Éclat Traiteur · Gastronomie d'exception</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Swiper CSS (ajouté pour le nouveau carrousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <style>
+    /* ---------- RESET & VARIABLES ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: rgb(0, 0, 0);
+      color: #f0f0f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+     
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .container {
+      
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    /* ---------- SLIDER 3D (déplacé dans la galerie) ---------- */
+    .slider3d-container{
+      width:200px;
+      height:350px;
+      margin:40px auto;  /* centré dans la section */
+      perspective:1000px;
+      position:relative;
+      z-index: 1;
+      -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004);
+    }
+    .slider3d{
+      width:100%;
+      height:100%;
+      position:relative;
+      transform: perspective(1000px);
+      transform-style:preserve-3d;
+      animation:rotate3d 20s linear infinite;
+    }
+    .slide3d{
+      position:absolute;
+      width:100%;
+      height:100%;
+      top: 0;
+      left: 0;
+    }
+    .slide3d img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    }
+    .slide3d:nth-child(1){
+      transform:rotateY(0deg) translateZ(300px);
+    }
+    .slide3d:nth-child(2){
+      transform:rotateY(90deg) translateZ(300px);
+    }
+    .slide3d:nth-child(3){
+      transform:rotateY(180deg) translateZ(300px);
+    }
+    .slide3d:nth-child(4){
+      transform:rotateY(270deg) translateZ(300px);
+    }
+    @keyframes rotate3d{
+      from{ transform:rotateY(0deg); }
+      to{ transform:rotateY(360deg); }
+    }
+    /* ---------- COULEURS ÉLÉGANTES ---------- */
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #f5e7b2;
+      --dark: #0a0a0a;
+      --dark-soft: #1a1a1a;
+      --red-gastro: #9e2b2b;
+      --white-soft: #f8f8f8;
+      --shadow: 0 20px 35px -8px rgba(0,0,0,0.7);
+    }
+    .gold-text {
+      color: var(--gold);
+    }
+    .btn {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      padding: 14px 38px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      border-radius: 40px;
+    }
+    .btn:hover {
+      background: var(--gold);
+      color: #0a0a0a;
+      box-shadow: 0 0 20px var(--gold);
+      transform: translateY(-3px);
+    }
+    .btn-full {
+      background: var(--gold);
+      color: #0a0a0a;
+      border: none;
+    }
+    .btn-full:hover {
+      background: #b5943c;
+      box-shadow: 0 0 25px var(--gold);
+    }
+    /* ---------- HEADER ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212,175,55,0.3);
+      padding: 15px 0;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      transition: 0.3s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 5px;
+    }
+    .nav-links a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: url('pexels-enginakyurt-2531196.jpg') center/cover fixed;
+      isolation: isolate;
+      padding: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(95deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 70%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 30px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.7);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 35px;
+      color: #ddd;
+    }
+    /* ---------- SECTIONS TITLES ---------- */
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--gold);
+    }
+    /* ---------- MENU + FILTERS ---------- */
+    .menu-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--gold);
+      color: #0a0a0a;
+    }
+    .search-box {
+      display: flex;
+      max-width: 400px;
+      margin: 0 auto 40px;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 15px 20px;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 50px 0 0 50px;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+    }
+    .search-box input:focus {
+      border-color: var(--gold);
+    }
+    .search-box button {
+      background: var(--gold);
+      border: none;
+      padding: 0 25px;
+      border-radius: 0 50px 50px 0;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #0a0a0a;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .menu-card {
+      background: #151515;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px -10px black;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(212,175,55,0.2);
+      position: relative;
+    }
+    .menu-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 30px 50px -10px black;
+      border-color: var(--gold);
+    }
+    .menu-img {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      transition: 0.7s;
+    }
+    .menu-card:hover .menu-img {
+      transform: scale(1.1);
+    }
+    .menu-info {
+      padding: 25px 20px;
+    }
+    .menu-info h3 {
+      font-size: 1.7rem;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+    .menu-category {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      border: 1px solid var(--gold);
+    }
+    .menu-desc {
+      color: #aaa;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    .menu-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .add-to-cart {
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .add-to-cart:hover:not(:disabled) {
+      background: var(--gold);
+      color: black;
+    }
+    .add-to-cart:disabled {
+      opacity: 0.3;
+      border-color: #666;
+      cursor: not-allowed;
+    }
+    /* ---------- PANIER (CART) ---------- */
+    .cart-section {
+      background: var(--dark-soft);
+      border-radius: 30px;
+      padding: 40px;
+      margin-top: 70px;
+      border: 1px solid var(--gold);
+    }
+    .cart-items {
+      margin: 25px 0;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px dashed #333;
+    }
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .cart-item-name {
+      font-weight: 600;
+    }
+    .cart-item-price {
+      color: var(--gold);
+    }
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cart-qty button {
+      background: #2a2a2a;
+      border: none;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .cart-total {
+      font-size: 1.8rem;
+      text-align: right;
+      margin: 30px 0 20px;
+    }
+    /* ---------- ADMIN TABLE (STYLE EXCEL) ---------- */
+    .admin-table {
+      overflow-x: auto;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1000px;
+    }
+    th {
+      background: var(--gold);
+      color: #0a0a0a;
+      padding: 15px;
+      font-weight: 600;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    input, select {
+      background: #222;
+      border: 1px solid #444;
+      color: white;
+      padding: 8px 10px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    input:focus {
+      border-color: var(--gold);
+      outline: none;
+    }
+    .btn-icon {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 2px;
+    }
+    .btn-icon:hover {
+      background: var(--gold);
+      color: black;
+    }
+    .btn-delete {
+      border-color: var(--red-gastro);
+      color: #ff6b6b;
+    }
+    .btn-delete:hover {
+      background: var(--red-gastro);
+      color: white;
+    }
+    /* ---------- FORMULAIRE RÉSERVATION ---------- */
+    .booking-form {
+      background: #151515;
+      padding: 45px;
+      border-radius: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .booking-form input, .booking-form select, .booking-form textarea {
+      background: #222;
+      border: 1px solid #3a3a3a;
+      padding: 15px;
+      color: white;
+      border-radius: 50px;
+      width: 100%;
+    }
+    .booking-form button {
+      grid-column: span 2;
+      max-width: 300px;
+      margin: 20px auto 0;
+    }
+    /* ---------- STYLES POUR LE NOUVEAU CARROUSEL (TRENDING FOOD) ---------- */
+    .trending-section {
+      background: #111; /* pour s'intégrer au thème sombre */
+    }
+    .trending-section .swiper {
+      width: 100%;
+      padding-top: 50px;
+      padding-bottom: 80px;
+      position: relative;
+    }
+    .trending-section .swiper-slide {
+      background: #222;
+      border-radius: 15px;
+      overflow: hidden;
+      width: 280px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: 0.4s;
+    }
+    .trending-section .swiper-slide img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .trending-section .food-info {
+      padding: 15px;
+      text-align: left;
+    }
+    .trending-section .food-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .trending-section .food-rating {
+      font-size: 14px;
+      color: gold;
+      margin-top: 5px;
+    }
+    /* Défilement linéaire continu */
+    .trending-section .swiper-wrapper {
+      transition-timing-function: linear !important;
+    }
+    .trending-section .swiper-button-next,
+    .trending-section .swiper-button-prev {
+      color: white;
+    }
+    .trending-section .swiper-pagination-bullet {
+      background: white;
+    }
+    /* effet apparition progressive à droite */
+    .trending-section .swiper::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 120px;
+      height: 100%;
+      background: linear-gradient(to left, #111, transparent);
+      pointer-events: none;
+      z-index: 10;
+    }
+    /* ---------- AVIS CLIENTS ---------- */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .review-card {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 30px;
+      border: 1px solid rgba(212,175,55,0.3);
+    }
+    .stars {
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+    /* ---------- MAP ---------- */
+    .map-container {
+      border-radius: 30px;
+      overflow: hidden;
+      border: 3px solid var(--gold);
+      height: 400px;
+    }
+    /* ---------- ANIMATIONS SCROLL ---------- */
+   .fade-up{
+  opacity:0;
+  transform:translateY(60px) scale(0.8);
+  transition:all 0.8s cubic-bezier(.17,.67,.83,.67);
+}
+
+.fade-up.appear{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1000px) {
+      .header-inner { flex-direction: column; gap: 15px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">Éclat Traiteur</div>
+      <div class="nav-links">
+        <a href="#home">Accueil</a>
+        <a href="#menu">Menu</a>
+        <a href="#booking">Réservation</a>
+        <a href="#gallery">Galerie</a>
+        <a href="#reviews">Avis</a>
+        <a href="#admin">Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NOUVELLE SECTION : TRENDING FOOD (carrousel Swiper) -->
+  <section class="trending-section container">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" alt="Burger">
+          <div class="food-info"><div class="food-title">Burger</div><div class="food-rating">⭐ 4.5</div></div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe" alt="Fresh Curry">
+          <div class="food-info"><div class="food-title">Fresh Curry</div><div class="food-rating">⭐ 4.6</div></div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="Pancake">
+          <div class="food-info"><div class="food-title">Pancake</div><div class="food-rating">⭐ 4.4</div></div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" alt="Burger">
+          <div class="food-info"><div class="food-title">Burger</div><div class="food-rating">⭐ 4.5</div></div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe" alt="Fresh Curry">
+          <div class="food-info"><div class="food-title">Fresh Curry</div><div class="food-rating">⭐ 4.6</div></div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="Pancake">
+          <div class="food-info"><div class="food-title">Pancake</div><div class="food-rating">⭐ 4.4</div></div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd" alt="Salade">
+          <div class="food-info"><div class="food-title">Salade</div><div class="food-rating">⭐ 4.3</div></div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" alt="Pizza">
+          <div class="food-info"><div class="food-title">Pizza</div><div class="food-rating">⭐ 4.7</div></div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <h1>L'art culinaire <br><span class="gold-text">pour vos moments précieux</span></h1>
+      <p>Une symphonie de saveurs signée par nos chefs étoilés. Faites de chaque réception un souvenir inoubliable.</p>
+      <a href="#menu" class="btn btn-full">Commander maintenant</a>
+    </div>
+  </section>
+
+  <!-- MENU INTERACTIF -->
+  <section id="menu" class="container">
+    <h2 class="section-title">Notre Menu Gastronomique</h2>
+    <div class="menu-filter">
+      <button class="filter-btn active" data-filter="all">Tous</button>
+      <button class="filter-btn" data-filter="entree">Entrées</button>
+      <button class="filter-btn" data-filter="plat">Plats</button>
+      <button class="filter-btn" data-filter="dessert">Desserts</button>
+      <button class="filter-btn" data-filter="boisson">Boissons</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Rechercher un plat...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <!-- PANIER -->
+    <div class="cart-section" id="cart">
+      <h3><i class="fas fa-shopping-basket gold-text"></i> Votre panier</h3>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-total" id="cartTotal">Total: 0€</div>
+      <button class="btn btn-full" id="checkoutBtn" style="width:100%;">Passer la commande</button>
+    </div>
+  </section>
+
+  <!-- ADMIN PANEL (TABLEAU DE GESTION) -->
+  <section id="admin" class="container">
+    <h2 class="section-title">Gestion Admin <span style="font-size:1rem;">(style Excel)</span></h2>
+    <div class="admin-table">
+      <table id="adminTable">
+        <thead>
+          <tr><th>Image URL</th><th>Nom</th><th>Catégorie</th><th>Description</th><th>Prix (€)</th><th>Dispo</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="adminBody"></tbody>
+      </table>
+      <div style="display:flex; gap:15px; margin-top:25px;">
+        <input type="text" id="newImage" placeholder="URL image" value="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&auto=format">
+        <input type="text" id="newName" placeholder="Nom">
+        <select id="newCat"><option value="entree">Entrée</option><option value="plat">Plat</option><option value="dessert">Dessert</option><option value="boisson">Boisson</option></select>
+        <input type="text" id="newDesc" placeholder="Description">
+        <input type="number" id="newPrice" placeholder="Prix" value="20">
+        <button class="btn-icon" id="addNewBtn"><i class="fas fa-plus"></i> Ajouter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉSERVATION D'ÉVÉNEMENT -->
+  <section id="booking" class="container">
+    <h2 class="section-title">Réserver un événement</h2>
+    <form class="booking-form" id="bookingForm">
+      <input type="text" placeholder="Nom complet" required>
+      <input type="email" placeholder="Email" required>
+      <select required><option value="">Type d'événement</option><option>Mariage</option><option>Anniversaire</option><option>Entreprise</option></select>
+      <input type="date" required>
+      <input type="number" placeholder="Nombre de personnes" min="1" required>
+      <select><option>Menu Dégustation</option><option>Menu Prestige</option><option>Menu Végétarien</option></select>
+      <button type="submit" class="btn btn-full" style="grid-column:span 2;">Envoyer la réservation</button>
+    </form>
+  </section>
+
+  <!-- GALERIE DYNAMIQUE (slider 3D existant) -->
+  <section id="gallery" class="container">
+    <h2 class="section-title">Menu en vedette</h2>
+    <div class="slider3d-container">
+      <div class="slider3d">
+        <div class="slide3d"><img src="c:\Users\Lenovo\Documents\traiteur\istockphoto-819599654-2048x2048.jpg" alt="Plat 1"></div>
+        <div class="slide3d"><img src="pexels-angel-ayala-321556-28976235.jpg" alt="Plat 2"></div>
+        <div class="slide3d"><img src="pexels-angel-ayala-321556-28976231.jpg" alt="Plat 3"></div>
+        <div class="slide3d"><img src="pexels-jonathanborba-20335808.jpg" alt="Plat 4"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- AVIS CLIENTS -->
+  <section id="reviews" class="container">
+    <h2 class="section-title">Ce qu'ils disent</h2>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </section>
+
+  <!-- GOOGLE MAPS -->
+  <section id="map" class="container">
+    <h2 class="section-title">Nous trouver</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9914406082036!2d2.292292615674377!3d48.85837360860736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1652877765432!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Swiper JS (nécessaire pour le nouveau carrousel) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    (function() {
+      // ---------- DONNÉES INITIALES (MENU) ----------
+      let menuItems = [
+        { id: Date.now()+1, name: 'Foie Gras mi-cuit', category: 'entree', description: 'Chutney de figues et brioche toastée', price: 24, image: 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=600&auto=format', available: true },
+        { id: Date.now()+2, name: 'Homard bleu', category: 'plat', description: 'Sauce champagne, légumes de saison', price: 58, image: 'https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&auto=format', available: true },
+        { id: Date.now()+3, name: 'Soufflé au chocolat', category: 'dessert', description: 'Cœur coulant, glace vanille Bourbon', price: 16, image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format', available: true },
+        { id: Date.now()+4, name: 'Dom Pérignon 2012', category: 'boisson', description: 'Champagne d\'exception', price: 190, image: 'https://images.unsplash.com/photo-1595941044160-3762169b35ee?w=600&auto=format', available: true },
+        { id: Date.now()+5, name: 'Saint-Jacques rôties', category: 'entree', description: 'Beurre blanc au safran', price: 29, image: 'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=600&auto=format', available: true },
+         { id: Date.now()+1, name: 'Foie Gras mi-cuit', category: 'entree', description: 'Chutney de figues et brioche toastée', price: 24, image: 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=600&auto=format', available: true },
+        { id: Date.now()+2, name: 'Homard bleu', category: 'plat', description: 'Sauce champagne, légumes de saison', price: 58, image: 'https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&auto=format', available: true },
+        { id: Date.now()+3, name: 'Soufflé au chocolat', category: 'dessert', description: 'Cœur coulant, glace vanille Bourbon', price: 16, image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format', available: true },
+        { id: Date.now()+4, name: 'Dom Pérignon 2012', category: 'boisson', description: 'Champagne d\'exception', price: 190, image: 'https://images.unsplash.com/photo-1595941044160-3762169b35ee?w=600&auto=format', available: true },
+        { id: Date.now()+5, name: 'Saint-Jacques rôties', category: 'entree', description: 'Beurre blanc au safran', price: 29, image: 'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=600&auto=format', available: true },
+         { id: Date.now()+4, name: 'Dom Pérignon 2012', category: 'boisson', description: 'Champagne d\'exception', price: 190, image: 'https://images.unsplash.com/photo-1595941044160-3762169b35ee?w=600&auto=format', available: true },
+        { id: Date.now()+5, name: 'Saint-Jacques rôties', category: 'entree', description: 'Beurre blanc au safran', price: 29, image: 'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=600&auto=format', available: true },
+      ];
+
+      // ---------- ÉTAT PANIER ----------
+      let cart = [];
+
+      // ---------- ÉLÉMENTS DOM ----------
+      const menuGrid = document.getElementById('menuGrid');
+      const adminBody = document.getElementById('adminBody');
+      const cartItemsDiv = document.getElementById('cartItems');
+      const cartTotalSpan = document.getElementById('cartTotal');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const searchInput = document.getElementById('searchInput');
+      const addNewBtn = document.getElementById('addNewBtn');
+
+      let currentFilter = 'all';
+      let searchTerm = '';
+
+      // ---------- RENDU MENU ----------
+      function renderMenu() {
+        const filtered = menuItems.filter(item => {
+          const matchesFilter = currentFilter === 'all' || item.category === currentFilter;
+          const matchesSearch = item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+          return matchesFilter && matchesSearch && item.available === true;
+        });
+        menuGrid.innerHTML = filtered.map(item => `
+          <div class="menu-card">
+            <div class="menu-img" style="background-image: url('${item.image}');"></div>
+            <div class="menu-info">
+              <h3>${item.name}</h3>
+              <span class="menu-category">${item.category}</span>
+              <p class="menu-desc">${item.description}</p>
+              <div class="menu-footer">
+                <span class="menu-price">${item.price}€</span>
+                <button class="add-to-cart" data-id="${item.id}" ${!item.available ? 'disabled' : ''}><i class="fas fa-shopping-cart"></i></button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // ---------- RENDU ADMIN ----------
+      function renderAdmin() {
+        adminBody.innerHTML = menuItems.map(item => `
+          <tr data-id="${item.id}">
+            <td><input type="text" class="admin-img" value="${item.image}"></td>
+            <td><input type="text" class="admin-name" value="${item.name}"></td>
+            <td><select class="admin-cat"><option ${item.category=='entree'?'selected':''} value="entree">Entrée</option><option ${item.category=='plat'?'selected':''} value="plat">Plat</option><option ${item.category=='dessert'?'selected':''} value="dessert">Dessert</option><option ${item.category=='boisson'?'selected':''} value="boisson">Boisson</option></select></td>
+            <td><input type="text" class="admin-desc" value="${item.description}"></td>
+            <td><input type="number" class="admin-price" value="${item.price}"></td>
+            <td><input type="checkbox" class="admin-avail" ${item.available ? 'checked' : ''}></td>
+            <td>
+              <button class="btn-icon save-row"><i class="fas fa-save"></i></button>
+              <button class="btn-icon btn-delete delete-row"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // ---------- RENDU PANIER ----------
+      function renderCart() {
+        if(cart.length===0) {
+          cartItemsDiv.innerHTML = '<p class="gold-text">Votre panier est vide</p>';
+          cartTotalSpan.innerText = 'Total: 0€';
+          return;
+        }
+        let html = '';
+        let total = 0;
+        cart.forEach(citem => {
+          const menuItem = menuItems.find(m => m.id === citem.id);
+          if(!menuItem) return;
+          total += menuItem.price * citem.qty;
+          html += `
+            <div class="cart-item" data-id="${citem.id}">
+              <div class="cart-item-info">
+                <span class="cart-item-name">${menuItem.name}</span>
+                <span class="cart-item-price">${menuItem.price}€</span>
+              </div>
+              <div class="cart-qty">
+                <button class="qty-minus">-</button>
+                <span>${citem.qty}</span>
+                <button class="qty-plus">+</button>
+                <button class="btn-icon btn-delete remove-item" style="margin-left:10px;"><i class="fas fa-times"></i></button>
+              </div>
+            </div>
+          `;
+        });
+        cartItemsDiv.innerHTML = html;
+        cartTotalSpan.innerText = `Total: ${total}€`;
+      }
+
+      // ---------- MISE À JOUR GLOBALE ----------
+      function refreshAll() {
+        renderMenu();
+        renderAdmin();
+        renderCart();
+      }
+
+      // ---------- FILTRES ----------
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          renderMenu();
+        });
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        searchTerm = e.target.value.toLowerCase();
+        renderMenu();
+      });
+
+      // ---------- GESTION PANIER (EVENT DELEGATION) ----------
+      document.addEventListener('click', (e) => {
+        // AJOUT AU PANIER
+        if(e.target.closest('.add-to-cart')) {
+          const btn = e.target.closest('.add-to-cart');
+          const id = Number(btn.dataset.id);
+          const existing = cart.find(c => c.id === id);
+          if(existing) existing.qty++;
+          else cart.push({ id, qty:1 });
+          renderCart();
+        }
+        // PLUS / MOINS / SUPPR PANIER
+        if(e.target.closest('.qty-plus')) {
+          const cartItem = e.target.closest('.cart-item');
+          const id = Number(cartItem.dataset.id);
+          const existing = cart.find(c => c.id === id);
+          if(existing) existing.qty++;
+          renderCart();
+        }
+        if(e.target.closest('.qty-minus')) {
+          const cartItem = e.target.closest('.cart-item');
+          const id = Number(cartItem.dataset.id);
+          const existing = cart.find(c => c.id === id);
+          if(existing && existing.qty>1) existing.qty--;
+          else cart = cart.filter(c => c.id !== id);
+          renderCart();
+        }
+        if(e.target.closest('.remove-item')) {
+          const cartItem = e.target.closest('.cart-item');
+          const id = Number(cartItem.dataset.id);
+          cart = cart.filter(c => c.id !== id);
+          renderCart();
+        }
+      });
+
+      // CHECKOUT
+      document.getElementById('checkoutBtn').addEventListener('click', () => {
+        if(cart.length===0) alert('Votre panier est vide');
+        else { alert('Commande envoyée (simulation)'); cart=[]; renderCart(); }
+      });
+
+      // ---------- ADMIN : SAUVEGARDE / SUPPRESSION ----------
+      document.addEventListener('click', (e) => {
+        if(e.target.closest('.save-row')) {
+          const row = e.target.closest('tr');
+          const id = Number(row.dataset.id);
+          const item = menuItems.find(m => m.id === id);
+          if(item) {
+            item.image = row.querySelector('.admin-img').value;
+            item.name = row.querySelector('.admin-name').value;
+            item.category = row.querySelector('.admin-cat').value;
+            item.description = row.querySelector('.admin-desc').value;
+            item.price = parseFloat(row.querySelector('.admin-price').value);
+            item.available = row.querySelector('.admin-avail').checked;
+          }
+          if(!item.available) cart = cart.filter(c => c.id !== id);
+          refreshAll();
+        }
+        if(e.target.closest('.delete-row')) {
+          const row = e.target.closest('tr');
+          const id = Number(row.dataset.id);
+          menuItems = menuItems.filter(m => m.id !== id);
+          cart = cart.filter(c => c.id !== id);
+          refreshAll();
+        }
+      });
+
+      // AJOUT NOUVEAU PLAT
+      addNewBtn.addEventListener('click', () => {
+        const newItem = {
+          id: Date.now() + Math.random(),
+          name: document.getElementById('newName').value || 'Nouveau plat',
+          category: document.getElementById('newCat').value,
+          description: document.getElementById('newDesc').value || 'Description',
+          price: parseFloat(document.getElementById('newPrice').value) || 15,
+          image: document.getElementById('newImage').value || 'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600',
+          available: true
+        };
+        menuItems.push(newItem);
+        refreshAll();
+        document.getElementById('newName').value = '';
+        document.getElementById('newDesc').value = '';
+        document.getElementById('newPrice').value = '20';
+      });
+
+      // ---------- RÉSERVATION ----------
+      document.getElementById('bookingForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Demande de réservation envoyée ! Nous vous contacterons rapidement.');
+        e.target.reset();
+      });
+
+      // ---------- AVIS STATIQUES ----------
+      const reviewsGrid = document.getElementById('reviewsGrid');
+      const avis = [
+        { name: 'Claire D.', stars: 5, text: 'Un traiteur exceptionnel ! Le foie gras était divin. Service parfait.' },
+        { name: 'Marc & Julie', stars: 5, text: 'Notre mariage a été sublime grâce à eux. Les invités en parlent encore.' },
+        { name: 'Thierry L.', stars: 4, text: 'Très professionnel, plats raffinés. Je recommande.' },
+      ];
+      reviewsGrid.innerHTML = avis.map(a => `
+        <div class="review-card">
+          <div class="stars">${'★'.repeat(a.stars)}${'☆'.repeat(5-a.stars)}</div>
+          <p style="font-style:italic;">"${a.text}"</p>
+          <h4 style="margin-top:20px;">− ${a.name}</h4>
+        </div>
+      `).join('');
+
+      // ---------- ANIMATIONS AU SCROLL (fade-up) ----------
+      const faders = document.querySelectorAll('.section-title, .menu-card, .cart-section, .admin-table, .booking-form, .slider3d-container, .review-card, .trending-section');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) entry.target.classList.add('appear');
+        });
+      }, { threshold: 0.2 });
+      faders.forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
+
+      // ---------- INITIAL RENDER ----------
+      refreshAll();
+    })();
+
+    // Initialisation du carrousel Swiper (Trending Food)
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+        reverseDirection: true  // images arrivent toujours de la droite
+      },
+      speed: 5000,
+      grabCursor: true,
+      effect: "coverflow",
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 150,
+        modifier: 1,
+        slideShadows: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      breakpoints: {
+        320: { slidesPerView: 1 },
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 4 }
+      }
+    });
+  </script>
+
+  <footer style="background:#111; padding:40px 0; text-align:center; border-top:2px solid var(--gold);">
+    <p class="gold-text">© Éclat Traiteur — L'élégance gastronomique</p>
+    <p style="margin-top:10px;">12 avenue des Champs-Élysées, 75008 Paris</p>
+  </footer>
+</body>
+</html>

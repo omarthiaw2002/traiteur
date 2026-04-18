@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Menu Traiteur</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#000000;
+margin:0;
+}
+
+/* TITRE */
+
+.titre-menu{
+text-align:center;
+font-size:40px;
+margin-top:40px;
+color:#b48a5a;
+}
+
+/* BOUTONS */
+
+.filtres{
+text-align:center;
+margin:40px 0;
+}
+
+.filtres button{
+padding:12px 25px;
+margin:10px;
+border:none;
+background:#b48a5a;
+color:white;
+border-radius:30px;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+.filtres button:hover{
+background:#8c6a45;
+}
+
+/* GALERIE */
+
+.galerie{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+width:90%;
+margin:auto;
+padding-bottom:60px;
+}
+
+.plat{
+position:relative;
+overflow:hidden;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.plat img{
+width:100%;
+height:220px;
+object-fit:cover;
+transition:0.4s;
+}
+
+.plat:hover img{
+transform:scale(1.1);
+}
+
+/* NOM DU PLAT */
+
+.nom{
+position:absolute;
+bottom:0;
+background:rgba(0,0,0,0.6);
+color:white;
+width:100%;
+text-align:center;
+padding:10px;
+font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 class="titre-menu">Notre Menu</h1>
+
+
+<div class="galerie">
+
+<div class="plat plats">
+<img src="c:\Users\Lenovo\Documents\traiteur\OIP.jpg">
+<div class="nom">Michoui</div>
+</div>
+
+<div class="plat plats">
+<img src="c:\Users\Lenovo\Documents\traiteur\poulet roti.jpg">
+<div class="nom">Poulet rôti</div>
+</div>
+
+<div class="plat plats">
+<img src="c:\Users\Lenovo\Documents\traiteur\Dibi poulet.jpg">
+<div class="nom">Dibi poulet</div>
+</div>
+
+<div class="plat brochettes">
+<img src="https://images.unsplash.com/photo-1529042410759-befb1204b468">
+<div class="nom">Brochette mixte</div>
+</div>
+
+<div class="plat brochettes">
+<img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
+<div class="nom">Brochette boeuf</div>
+</div>
+
+<div class="plat entrees">
+<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+<div class="nom">Salade chinoise</div>
+</div>
+
+<div class="plat entrees">
+<img src="c:\Users\Lenovo\Documents\traiteur\salade piémont.jpg">
+<div class="nom">Salade Piémontaise</div>
+</div>
+
+<div class="plat entrees">
+<img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe">
+<div class="nom">Salade exotique</div>
+</div>
+
+<div class="plat accompagnements">
+<img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5">
+<div class="nom">Frites</div>
+</div>
+
+<div class="plat accompagnements">
+<img src="c:\Users\Lenovo\Documents\traiteur\frites barquette.jpg">
+<div class="nom">Frites barquette</div>
+</div>
+
+<div class="plat accompagnements">
+<img src="c:\Users\Lenovo\Documents\traiteur\couscous.jpg">
+<div class="nom">Couscous</div>
+</div>
+
+<div class="plat accompagnements">
+<img src="c:\Users\Lenovo\Documents\traiteur\pommter sauté.jpg">
+<div class="nom">Pomme de terre</div>
+</div>
+
+</div>
+
+<script>
+
+function filtrer(categorie){
+
+let plats = document.querySelectorAll(".plat");
+
+plats.forEach(function(p){
+
+if(categorie === "all"){
+p.style.display="block";
+}
+else if(p.classList.contains(categorie)){
+p.style.display="block";
+}
+else{
+p.style.display="none";
+}
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guiguille Traiteur | Gastronomie sur mesure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;400;700;900&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Heebo', sans-serif; }
+        body { background-color: #F5F5F5; color: #030100; line-height: 1.6; }
+        .max-w-3xl { max-width: 48rem; margin: 0 auto; }
+        .text-center { text-align: center; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        
+        /* HEADER */
+        header { background: #F5F5F5; padding: 6px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { font-weight: 900; font-size: 1.6rem; text-transform: uppercase; color: #6B1B01; text-decoration: none; }
+        .logo span { color: #B82A02; }
+        
+        nav a { text-decoration: none; color: #030100; margin-left: 25px; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }
+        nav a:hover { color: #B82A02; }
+        
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .menu-toggle span { width: 25px; height: 3px; background: #030100; }
+        
+        @media (max-width: 992px) {
+            .menu-toggle { display: flex; }
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: #F5F5F5;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            nav.active { right: 0; }
+            nav a { margin: 20px 0; font-size: 1.2rem; }
+        }
+        
+        /* HERO AVEC FONDU ENCHAÎNÉ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        /* Les deux calques d'images superposés */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.2s ease-in-out;  /* durée du fondu */
+        }
+        .hero-bg.current {
+            z-index: 1;
+            opacity: 1;
+        }
+        .hero-bg.next {
+            z-index: 2;
+            opacity: 0;
+        }
+        /* Dégradé sombre par-dessus les images pour la lisibilité */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(54, 53, 53, 0.295));
+            z-index: 3;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 4;
+            padding: 100px 20px;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+        .hero-content h1 { font-size: clamp(2.2rem,5vw,4rem); font-weight: 900; margin-bottom: 1.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .hero-content p { font-size: clamp(1.1rem,2vw,1.5rem); margin-bottom: 2rem; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        
+        .btn { display: inline-block; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        .btn-amber { background: #d97706; color: white; }
+        .btn-amber:hover { background: #b85e00; }
+        .btn-outline-white { border: 2px solid white; color: white; }
+        .btn-outline-white:hover { background: white; color: #030100; }
+        .btn-outline-dark { border: 2px solid #030100; color: #030100; }
+        .btn-outline-dark:hover { background: #B82A02; border-color: #B82A02; color: white; }
+        
+        .hero-split { display: flex; flex-wrap: wrap; background: white; }
+        .hero-split-text { flex: 1; padding: 10px 5%; display: flex; flex-direction: column; justify-content: center; }
+        .hero-split-text h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; }
+        .hero-split-img { flex: 1; min-height: 400px; background: url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80') center/cover; }
+        
+        .activities { padding: 80px 5%; background: #030100; color: white; text-align: center; }
+        .activities h2 { font-size: 2.5rem; margin-bottom: 50px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 40px; }
+        .card { text-decoration: none; color: inherit; text-align: center; }
+        .circle-img { width: 200px; height: 200px; border-radius: 50%; background-size: cover; background-position: center; margin: 0 auto 20px; border: 3px solid transparent; transition: 0.3s; }
+        .card:hover .circle-img { border-color: #B82A02; transform: scale(1.02); }
+        .card h3 { border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px; width: 80%; margin: 0 auto; text-transform: uppercase; }
+        
+        .parallax-section { padding: 120px 20px; background: linear-gradient(rgba(3, 1, 0, 0.384)), url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80') fixed center/cover; color: white; text-align: center; }
+        
+        footer { background: #030100; color: white; padding: 60px 5% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { border-bottom: 1px solid #6B1B01; padding-bottom: 10px; margin-bottom: 15px; text-transform: uppercase; }
+        .footer-col p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        
+        @media (max-width: 992px) {
+            .hero-split { flex-direction: column; }
+            .hero-split-text { text-align: center; }
+              .hero {
+            position: relative;
+            min-height: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="#" class="logo">Guiguille <span>Traiteur</span></a>
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <nav id="nav-menu">
+        <a href="#accueil">Accueil</a>
+        <a href="#prestations">Prestations</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- Section HERO avec fondu enchaîné -->
+<section id="accueil" class="hero">
+    <div class="hero-bg current" id="bg-current"></div>
+    <div class="hero-bg next" id="bg-next"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Bienvenue chez Guiguille Traiteur</h1>
+        <p>Des créations gastronomiques sur mesure pour vos événements exceptionnels</p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="#contact" class="btn btn-amber">Demander un devis</a>
+            <a href="#prestations" class="btn btn-outline-white">Nos services</a>
+        </div>
+    </div>
+</section>
+
+<section class="hero-split">
+    <div class="hero-split-text">
+        <h2>Traiteur & organisateur d’événements.</h2>
+        <p class="mb-6">Depuis 2007, nous sublimons vos réceptions dans le Pas-de-Calais et le Nord. Notre savoir-faire nous permet de prendre en charge vos événements familiaux ou professionnels avec une signature unique.</p>
+        <p class="mb-8">Cocktails, buffets froids ou vins d'honneur : nous créons des moments inoubliables adaptés à votre budget et à vos envies.</p>
+        <div><a href="ff.html" class="btn btn-outline-dark">Découvrir nos menus</a></div>
+    </div>
+    <div class="hero-split-img"></div>
+</section>
+
+<section id="prestations" class="activities">
+    <h2>Nos Prestations</h2>
+    <div class="grid">
+        <a href="mariage.html" class="card"><div class="circle-img" style="background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&q=80');"></div><h3>Mariages</h3></a>
+        <a href="seminaire.html" class="card"><div class="circle-img" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=400&h=400');"></div><h3>Séminaires</h3></a>
+        <a href="bapteme.html" class="card"><div class="circle-img" style="background-image: url('https://www.traiteurrestaurant-lepetitblanc.fr/ressources/images/Bapteme_369d_lg.jpg');"></div><h3>Baptême</h3></a>
+        <a href="ceremonie.html" class="card"><div class="circle-img" style="background-image: url('https://www.goutdailleurs.fr/wp-content/uploads/2024/09/repas-de-mariage.jpeg');"></div><h3>Cérémonies</h3></a>
+    </div>
+</section>
+
+<section class="parallax-section">
+    <div class="max-w-3xl">
+        <h3>Traiteur à Nœux-les-Mines</h3>
+        <h2>Un savoir-faire artisanal</h2>
+        <p class="mb-8">Chaque événement mérite une attention particulière. Nos chefs transforment vos idées en réalités gourmandes.</p>
+        <a href="#contact" class="btn btn-outline-white">Nous contacter</a>
+    </div>
+</section>
+
+<footer id="contact">
+    <div class="footer-grid">
+        <div class="footer-col"><h4>Contact</h4><p>123 Rue de la Mairie<br>62290 Nœux-les-Mines</p><p>Tél : 78 192 11 99</p></div>
+        <div class="footer-col"><h4>Services</h4><p>Mariages de prestige</p><p>Baptêmes & cérémonies</p><p>Buffets thématiques</p></div>
+        <div class="footer-col"><h4>Suivez-nous</h4><p>Facebook / Instagram</p><p>@guiguilletraiteur</p></div>
+    </div>
+    <p class="text-center" style="font-size:0.7rem; opacity:0.5;">© 2026 Guiguille Traiteur Style - Tous droits réservés.</p>
+</footer>
+
+<script>
+    // ---------- FONDU ENCHAÎNÉ (CROSSFADE) ----------
+    const images = [
+        "https://www.lecenac-traiteur.com/public/img/big/IMG09672jpg_668fb6913ed5e.jpg",
+        "https://cliniquesmedicaleslacroix.com/wp-content/uploads/2019/05/fruits-jus.jpg",
+        "https://lechevalblanc.fr/wp-content/uploads/2025/09/Buffet-de-mariage-champetre.jpg",
+        "https://traiteurlafertoise77.fr/wp-content/uploads/2025/07/menu-mariage-original-La-fertoise02.jpeg",
+        "https://www.arabnews.fr/sites/default/files/styles/670x395/public/2023-04/3.JPG?h=01414842"
+    ];
+
+    let currentIndex = 0;
+    let nextIndex = 1;
+    let isTransitioning = false;
+
+    const currentBg = document.getElementById('bg-current');
+    const nextBg = document.getElementById('bg-next');
+
+    // Initialisation : mettre la première image
+    if (currentBg && images.length) {
+        currentBg.style.backgroundImage = `url('${images[0]}')`;
+        nextBg.style.backgroundImage = `url('${images[1 % images.length]}')`;
+        currentBg.style.opacity = "1";
+        nextBg.style.opacity = "0";
+    }
+
+    function startFade() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        // Préparer l'image suivante
+        nextIndex = (currentIndex + 1) % images.length;
+        nextBg.style.backgroundImage = `url('${images[nextIndex]}')`;
+
+        // Lancer le fondu : l'image next devient visible, current s'efface
+        nextBg.style.opacity = "1";
+        currentBg.style.opacity = "0";
+
+        // Après la transition, inverser les rôles (swap)
+        setTimeout(() => {
+            // Échanger les classes ou les références : on permute le contenu des divs
+            // Méthode simple : recopier l'url de next vers current, et remettre next à opacity 0
+            const nextUrl = nextBg.style.backgroundImage;
+            currentBg.style.backgroundImage = nextUrl;
+            currentBg.style.opacity = "1";
+            nextBg.style.opacity = "0";
+            
+            currentIndex = nextIndex;
+            isTransitioning = false;
+        }, 1200); // doit correspondre à la durée de transition CSS (1.2s)
+    }
+
+    // Lancer le cycle toutes les 5 secondes
+    setInterval(startFade, 5000);
+
+    // ---------- MENU HAMBURGER SIMPLIFIÉ ----------
+    const toggle = document.getElementById('mobile-menu');
+    const nav = document.getElementById('nav-menu');
+    
+    if (toggle && nav) {
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+        });
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+        document.addEventListener('click', function(event) {
+            if (nav.classList.contains('active') && !nav.contains(event.target) && !toggle.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    }
+    
+    // scroll fluide
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>

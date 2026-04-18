@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guiguille Traiteur - Service de Traiteur Haut de Gamme</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for animations and effects */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .menu-item:hover .menu-item-details {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .menu-item-details {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-amber-600">Guiguille traiteur</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#accueil" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Accueil</a>
+                        <a href="#services" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Services</a>
+                        <a href="#menu" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Menu</a>
+                        <a href="#galerie" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Galerie</a>
+                        <a href="#temoignages" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Témoignages</a>
+                        <a href="#contact" class="bg-amber-600 text-white px-6 py-2 rounded-md text-lg font-medium hover:bg-amber-700 transition duration-300">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-amber-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4">
+            <div class="flex flex-col space-y-2">
+                <a href="#accueil" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium">Accueil</a>
+                <a href="#services" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium">Services</a>
+                <a href="#menu" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium">Menu</a>
+                <a href="#galerie" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium">Galerie</a>
+                <a href="#temoignages" class="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-lg font-medium">Témoignages</a>
+                <a href="#contact" class="bg-amber-600 text-white px-6 py-2 rounded-md text-lg font-medium hover:bg-amber-700 text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero min-h-screen flex items-center justify-center text-white fade-in">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Bienvenu chez guiguille-traiteur</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Des créations gastronomiques sur mesure pour vos événements exceptionnels</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Demander un devis</a>
+                <a href="#services" class="bg-transparent hover:bg-white hover:text-gray-900 text-white font-bold py-3 px-8 border-2 border-white rounded-full text-lg transition duration-300">Nos services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Notre Philosophie Culinaire</h2>
+                    <p class="text-gray-600 mb-6">Depuis 15 ans,  Guiguille traiteur sublime vos événements grâce à une cuisine raffinée et un service irréprochable. Notre équipe de chefs passionnés crée des expériences gustatives uniques en harmonisant saveurs, textures et présentations.</p>
+                    <p class="text-gray-600 mb-8">Nous sélectionnons rigoureusement des produits locaux et de saison pour garantir fraîcheur et qualité à chaque bouchée. Chaque événement est l'occasion de créer un menu sur mesure qui reflète votre personnalité et impressionne vos invités.</p>
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-amber-600 rounded-full p-3">
+                            <i class="fas fa-phone-alt text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-500">Appelez-nous pour discuter de votre événement</p>
+                            <p class="text-lg font-bold text-gray-900">+33 1 23 45 67 89</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <div class="relative z-10 rounded-lg overflow-hidden shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Notre équipe" class="w-full h-auto">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-amber-600 w-32 h-32 rounded-full z-0"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Nos Services Traiteur</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Des solutions culinaires complètes adaptées à tous vos événements</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg transition duration-500 hover:shadow-2xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="pexels-daria-andrievskaya-137434684-11066891.jpg" alt="Mariage" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-ring text-amber-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Mariages</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Un menu personnalisé pour votre jour J, de l'apéritif au dessert, avec un service impeccable qui fera de votre réception un moment inoubliable.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Dégustation préalable</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Service en salle ou extérieur</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Options végétariennes/végétaliennes</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="text-amber-600 font-medium hover:text-amber-700 inline-flex items-center">En savoir plus <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg transition duration-500 hover:shadow-2xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Événements d'entreprise" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-briefcase text-amber-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Événements d'entreprise</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Des solutions culinaires professionnelles pour vos séminaires, lancements de produits ou cocktails réseautage, conçues pour impressionner.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Buffets sur mesure</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Stations interactives</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Options thématiques</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="text-amber-600 font-medium hover:text-amber-700 inline-flex items-center">En savoir plus <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg transition duration-500 hover:shadow-2xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dîners privés" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-home text-amber-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Dîners Privés</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Un chef à domicile pour préparer un repas gastronomique dans le confort de votre foyer, avec un service complet et un menu personnalisé.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Menu sur consultation</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Service complet</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-600 mr-2"></i>
+                                <span class="text-gray-600">Nettoyage inclus</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="text-amber-600 font-medium hover:text-amber-700 inline-flex items-center">En savoir plus <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Notre Menu Signature</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Découvrez une sélection de nos créations culinaires</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Menu Category 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-amber-600 px-6 py-4">
+                        <h3 class="text-xl font-bold text-white">Entrées</h3>
+                    </div>
+                    <div class="p-6">
+                        <!-- Menu Item 1 -->
+                        <div class="menu-item border-b border-gray-100 pb-6 mb-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900">Tartare de Saumon Bio</h4>
+                                    <p class="text-gray-600">Mariné au citron vert, avocat et coriandre fraîche</p>
+                                </div>
+                                <span class="font-bold text-amber-600">24€</span>
+                            </div>
+                            <div class="menu-item-details mt-2">
+                                <p class="text-sm text-gray-500">Accompagné de chips de pita maison et d'une touche de wasabi</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 2 -->
+                        <div class="menu-item border-b border-gray-100 pb-6 mb-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900">Foie Gras Maison</h4>
+                                    <p class="text-gray-600">Mi-cuit, chutney de figues et pain brioché toasté</p>
+                                </div>
+                                <span class="font-bold text-amber-600">28€</span>
+                            </div>
+                            <div class="menu-item-details mt-2">
+                                <p class="text-sm text-gray-500">Préparé selon la méthode traditionnelle, avec sel de Guérande</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 3 -->
+                        <div class="menu-item">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900">Velouté de Champignons</h4>
+                                    <p class="text-gray-600">Cèpes et girolles des bois, crème fraîche et truffe noire</p>
+                                </div>
+                                <span class="font-bold text-amber-600">18€</span>
+                            </div>
+                            <div class="menu-item-details mt-2">
+                                <p class="text-sm text-gray-500">Servi avec des croûtons à l'ail et parmesan reggiano</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Menu Category 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-amber-600 px-6 py-4">
+                        <h3 class="text-xl font-bold text-white">Plats Principaux</h3>
+                    </div>
+                    <div class="p-6">
+                        <!-- Menu Item 1 -->
+                        <div class="menu-item border-b border-gray-100 pb-6 mb-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900">Filet de Boeuf Wagyu</h4>
+                                    <p class="text-gray-600">A5, purée de céleri-rave et sauce au vin rouge</p>
+                                </div>
+                                <span class="font-bold text-amber-600">65€</span>
+                            </div>
+                            <div class="menu-item-details mt-2">
+                                <p class="text-sm text-gray-500">Accompagné de légumes de saison rôtis et de pommes soufflées</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 2 -->
+                        <div class="menu-item border-b border-gray-100 pb-6 mb-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900">Risotto aux Truffes</h4>
+                                    <p class="text-gray-600">Carnaroli crémeux, parmesan 24 mois et truffe noire fraîche</p>
+                                </div>
+                                <span class="font-bold text-amber-600">42€</span>
+                            </div>
+                            <div class="menu-item-details mt-2">
+                                <p class="text-sm text-gray-500">Option végétarienne disponible avec bouillon de légumes</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 3 -->
+                        <div class="menu-item">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900">Bar de Ligne Rôti</h4>
+                                    <p class="text-gray-600">Écrasé de pommes de terre à l'huile d'olive, émulsion citronnée</p>
+                                </div>
+                                <span class="font-bold text-amber-600">48€</span>
+                            </div>
+                            <div class="menu-item-details mt-2">
+                                <p class="text-sm text-gray-500">Pêché durablement en Méditerranée, servi avec des asperges vertes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#contact" class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-medium rounded-full text-white bg-amber-600 hover:bg-amber-700 transition duration-300">
+                    Demander le menu complet
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galerie" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Galerie de Nos Créations</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Un aperçu de nos réalisations pour inspirer votre prochain événement</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Buffet élégant" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Buffet Mariage</h3>
+                            <p class="text-white">Présentation élégante pour 120 convives</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Plat gastronomique" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Assiette Gastronomique</h3>
+                            <p class="text-white">Harmonie de saveurs et textures</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dessert raffiné" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Dessert Signature</h3>
+                            <p class="text-white">Chocolat et fruits rouges en harmonie</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Événement d'entreprise" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Cocktail d'Entreprise</h3>
+                            <p class="text-white">Service élégant pour 80 personnes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Mise en place" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Mise en Place</h3>
+                            <p class="text-white">Attention aux moindres détails</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="pexels-jeshoots-3584.jpg" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Jus delicieux</h3>
+                            <p class="text-white">Expérience interactive pour vos invités</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="temoignages" class="py-20 bg-amber-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Ils Nous Ont Fait Confiance</h2>
+                <p class="text-xl max-w-3xl mx-auto">Découvrez ce que nos clients disent de leur expérience avec Guiguille traiteur</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 testimonial-card transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="pexels-moses-loeto-2151644178-32636192.jpg" alt="Sophie Martin">
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-bold">Mamadou Fall</h3>
+                            <p class="text-amber-100">Mariage - Juin 2025</p>
+                        </div>
+                    </div>
+                    <p class="italic mb-6">"Le service de Guiguille traiteur a transformé notre mariage en une expérience culinaire inoubliable. Nos invités n'ont cessé de complimenter chaque plat, et l'équipe a été d'une professionnalisme exemplaire."</p>
+                    <div class="flex">
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 testimonial-card transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="pexels-pixabay-37546.jpg" alt="Pierre Dubois">
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-bold">Anta Diallo</h3>
+                            <p class="text-amber-100">Événement d'entreprise - Avril 2025</p>
+                        </div>
+                    </div>
+                    <p class="italic mb-6">"Pour notre gala annuel, nous avons fait appel à Guiguille traiteur et le résultat a dépassé nos attentes. La qualité des plats, la présentation et le service impeccable ont impressionné nos partenaires et clients."</p>
+                    <div class="flex">
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 testimonial-card transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="pexels-lara-jameson-9363204.jpg" alt="Camille Lefèvre">
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-bold">Ablaye Sonko</h3>
+                            <p class="text-amber-100">Dîner privé - Février 2025</p>
+                        </div>
+                    </div>
+                    <p class="italic mb-6">"Le chef est venu préparer un dîner surprise pour l'anniversaire de mon mari. Non seulement la cuisine était divine, mais toute l'expérience était magique. Nous nous souviendrons longtemps de cette soirée exceptionnelle."</p>
+                    <div class="flex">
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star text-amber-300"></i>
+                        <i class="fas fa-star-half-alt text-amber-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Prêt à Organiser Votre Événement ?</h2>
+                    <p class="text-gray-600 mb-8">Remplissez le formulaire ou contactez-nous directement pour discuter de vos besoins. Notre équipe se fera un plaisir de créer une expérience culinaire sur mesure pour votre événement.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-amber-600 rounded-full p-3">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Notre Adresse</h3>
+                                <p class="text-gray-600">15 Avenue des Gourmets, 75008 Dakar</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-amber-600 rounded-full p-3">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Téléphone</h3>
+                                <p class="text-gray-600">+33 1 23 45 67 89</p>
+                                <p class="text-gray-600">Disponible du lundi au samedi, 9h-19h</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-amber-600 rounded-full p-3">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Email</h3>
+                                <p class="text-gray-600">contact@guiguille-traiteur.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Envoyez-nous un message</h3>
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Votre nom *</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-600 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Votre email *</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-600 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-600 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="event" class="block text-sm font-medium text-gray-700 mb-1">Type d'événement *</label>
+                                <select id="event" name="event" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-600 focus:border-transparent">
+                                    <option value="">Sélectionnez...</option>
+                                    <option value="mariage">Mariage</option>
+                                    <option value="entreprise">Événement d'entreprise</option>
+                                    <option value="diner">Dîner privé</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Date prévue</label>
+                                <input type="date" id="date" name="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-600 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Votre message *</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-600 focus:border-transparent"></textarea>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                                    Envoyer la demande
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Guiguille traiteur</h3>
+                    <p class="text-gray-400">Service traiteur haut de gamme pour vos événements exceptionnels à Dakar .</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-white transition duration-300">Accueil</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                        <li><a href="#menu" class="text-gray-400 hover:text-white transition duration-300">Menu</a></li>
+                        <li><a href="#galerie" class="text-gray-400 hover:text-white transition duration-300">Galerie</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Mariages</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Événements d'entreprise</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Dîners privés</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Ateliers culinaires</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Réseaux Sociaux</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-pinterest-p text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="text-sm font-semibold mb-2">NEWSLETTER</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Votre email" class="px-4 py-2 text-gray-900 rounded-l-lg focus:outline-none w-full">
+                            <button class="bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-r-lg">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Guiguille traiteur. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Mentions légales</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Politique de confidentialité</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Conditions générales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-amber-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                    <i class="fas fa-check text-green-600 text-xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Message envoyé avec succès !</h3>
+                <p class="text-gray-600 mb-6">Nous avons bien reçu votre demande et vous contacterons dans les plus brefs délais.</p>
+                <button id="closeModal" class="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition duration-300">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to a server
+            // For this example, we'll just show the success modal
+            successModal.classList.remove('hidden');
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        closeModal.addEventListener('click', () => {
+            successModal.classList.add('hidden');
+        });
+        
+        // Close modal when clicking outside
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.classList.add('hidden');
+            }
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in, .menu-item, .testimonial-card, .dish-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

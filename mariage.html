@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariages d'Exception | Guiguille Traiteur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;400;700;900&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6B1B01; 
+            --secondary: #B82A02;
+            --dark: #030100;
+            --light: #F5F5F5;
+            --white: #ffffff;
+            --grey: #4A4A4A;
+            --whatsapp: #25D366; /* Vert WhatsApp officiel */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Heebo', sans-serif; }
+        body { background-color: var(--white); color: var(--dark); line-height: 1.6; }
+
+        header {
+            background: var(--light);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-weight: 900; font-size: 1.6rem; text-transform: uppercase; color: var(--primary); text-decoration: none; }
+        nav a { text-decoration: none; color: var(--dark); margin-left: 25px; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }
+
+        .hero-wedding {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80') center/cover fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        }
+        .hero-wedding h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; text-transform: uppercase; }
+        .hero-wedding p { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-top: 10px; }
+
+        .intro { padding: 80px 10%; text-align: center; max-width: 900px; margin: 0 auto; }
+        .intro h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; }
+        .intro p { font-size: 1.1rem; color: var(--grey); }
+
+        .formulas { background: var(--light); padding: 80px 5%; }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .formula-card {
+            background: white; border: 1px solid #ddd; transition: 0.3s;
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+        .formula-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--secondary); }
+        
+        .card-img { width: 100%; height: 200px; background-size: cover; background-position: center; }
+        .card-content { padding: 30px; text-align: center; flex-grow: 1; }
+        .formula-card h3 { font-size: 1.4rem; margin-bottom: 20px; text-transform: uppercase; border-bottom: 2px solid var(--primary); padding-bottom: 10px; display: inline-block; }
+        .formula-card ul { list-style: none; margin-bottom: 30px; text-align: left; }
+        .formula-card ul li { margin-bottom: 10px; color: #555; position: relative; padding-left: 20px; }
+        .formula-card ul li::before { content: "♥"; color: var(--secondary); position: absolute; left: 0; font-weight: bold; }
+
+        .gallery-wedding { padding: 80px 5%; background: var(--white); text-align: center; }
+        .gallery-wedding h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; }
+        .subtitle-gallery { font-size: 1.1rem; color: var(--grey); margin-bottom: 50px; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            overflow: hidden; border-radius: 5px; aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* --- STYLE DU BOUTON WHATSAPP --- */
+        .cta-banner { background: var(--dark); color: white; padding: 60px 5%; text-align: center; }
+        
+        .btn-whatsapp { 
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 40px; 
+            background: var(--whatsapp); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        .btn-whatsapp:hover { 
+            background: #1eb954; 
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        .btn-whatsapp i { font-size: 1.4rem; }
+
+        footer { background: var(--dark); color: white; padding: 40px 5%; text-align: center; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero-wedding h1 { font-size: 2.5rem; }
+            .hero-wedding p { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Guiguille <span style="color:var(--dark)">Traiteur</span></a>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero-wedding">
+        <div>
+            <h1>Le Grand Jour</h1>
+            <p>Une gastronomie raffinée pour une union inoubliable</p>
+        </div>
+    </section>
+
+    <section class="intro">
+        <h2>L'Art de Recevoir</h2>
+        <p>Parce que votre mariage est unique, nous mettons notre savoir-faire au service de vos émotions. De la finesse du <strong>cocktail gourmand</strong> à l'élégance du dîner, chaque détail est pensé pour ravir vos convives et sublimer votre célébration.</p>
+    </section>
+
+    <section class="formulas">
+        <div class="formula-grid">
+            
+            <div class="formula-card">
+                <div class="card-img" style="background-image: url('https://cdn0.mariages.net/vendor/1452/3_2/960/jpeg/2721656d-0928-457e-b28b-d0e91d5b685d_3_301452-168055274774654.jpeg');"></div>
+                <div class="card-content">
+                    <h3>Cocktail Gourmand</h3>
+                    <ul>
+                        <li>Ateliers culinaires en direct (découpe, plancha)</li>
+                        <li>Assortiment de pièces froides et chaudes</li>
+                        <li>Bar à cocktails et rafraîchissements</li>
+                        <li>Animations foie gras ou fruits de mer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="formula-card">
+                <div class="card-img" style="background-image: url('https://resize.elle.fr/original/var/plain_site/storage/images/elle-a-table/les-dossiers-de-la-redaction/dossier-de-la-redac/menu-gastronomique/88780110-1-fre-FR/Comment-faire-un-menu-gastronomique.jpg');"></div>
+                <div class="card-content">
+                    <h3>Dîner de Prestige</h3>
+                    <ul>
+                        <li>Entrées gastronomiques de saison</li>
+                        <li>Plats signatures servis à l'assiette</li>
+                        <li>Plateau de fromages affinés</li>
+                        <li>Cascade de desserts & Wedding Cake</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="formula-card">
+                <div class="card-img" style="background-image: url('https://www.latablebretonne.fr/sites/default/files/upload/retour-de-noces-atelier-buffet-evenement-latablebretonne.jpg');"></div>
+                <div class="card-content">
+                    <h3>Retour de Noces</h3>
+                    <ul>
+                        <li>Buffet convivial de lendemains</li>
+                        <li>Brunch complet sucré-salé</li>
+                        <li>Bar à salades et grillades</li>
+                        <li>Boissons chaudes et jus détox</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="gallery-wedding">
+        <h2>Inspirations Mariage</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://www.mariage.com/wp-content/uploads/2013/12/quel-budget-pour-mon-repas-de-mariage_331_816.jpg" alt="Buffet Mariage"></div>
+            <div class="gallery-item"><img src="https://villatajmarrakech.com/wp-content/uploads/2022/06/assortissement-de-patisseries-marocaines-parfaits-pour-mariages.jpg" alt="Wedding Cake"></div>
+            <div class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2zKjinuNmKxAXGPm0zM_KgDVKaDstStaC1w&s" alt="Cocktail"></div>
+            <div class="gallery-item"><img src="https://smakk.fr/wp-content/uploads/2024/06/paves-truite-grilles.jpg" alt="Table décorée"></div>
+            <div class="gallery-item"><img src="https://lechevalblanc.fr/wp-content/uploads/2025/09/Buffet-de-mariage-champetre.jpg" alt="Cocktail Mariage"></div>
+            
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <h2>Votre projet commence ici</h2>
+        <p style="margin-bottom: 30px; opacity: 0.8;">Discutons ensemble de vos envies sur WhatsApp pour une réponse rapide.</p>
+        
+        <a href="https://wa.me/781921199?text=Bonjour,%20je%20souhaite%20obtenir%20des%20informations%20pour%20un%20mariage." class="btn-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> Nous contacter sur WhatsApp
+        </a>
+    </section>
+
+    <footer>
+        <p>© 2026 Guiguille Traiteur - Créateur d'instants magiques | Nord & Pas-de-Calais</p>
+    </footer>
+
+</body>
+</html>
