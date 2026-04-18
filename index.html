@@ -55,7 +55,6 @@
             color: white;
             overflow: hidden;
         }
-        /* Les deux calques d'images superposés */
         .hero-bg {
             position: absolute;
             top: 0;
@@ -64,7 +63,7 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            transition: opacity 1.2s ease-in-out;  /* durée du fondu */
+            transition: opacity 1.2s ease-in-out;
         }
         .hero-bg.current {
             z-index: 1;
@@ -74,7 +73,6 @@
             z-index: 2;
             opacity: 0;
         }
-        /* Dégradé sombre par-dessus les images pour la lisibilité */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -96,11 +94,11 @@
         .hero-content p { font-size: clamp(1.1rem,2vw,1.5rem); margin-bottom: 2rem; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         
         .btn { display: inline-block; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
-        .btn-amber { background: #d97706; color: white; }
+        .btn-amber { background: #d97706; color: rgb(217, 27, 27); }
         .btn-amber:hover { background: #b85e00; }
         .btn-outline-white { border: 2px solid white; color: white; }
         .btn-outline-white:hover { background: white; color: #030100; }
-        .btn-outline-dark { border: 2px solid #030100; color: #030100; }
+        .btn-outline-dark { border: 2px solid #030100; color: #030100;background: #B82A02; }
         .btn-outline-dark:hover { background: #B82A02; border-color: #B82A02; color: white; }
         
         .hero-split { display: flex; flex-wrap: wrap; background: white; }
@@ -122,20 +120,40 @@
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 40px; margin-bottom: 40px; }
         .footer-col h4 { border-bottom: 1px solid #6B1B01; padding-bottom: 10px; margin-bottom: 15px; text-transform: uppercase; }
         .footer-col p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+
+        /* BOUTON WHATSAPP */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: #FFF;
+        }
+        .whatsapp-float img {
+            width: 35px;
+            height: 35px;
+        }
         
         @media (max-width: 992px) {
             .hero-split { flex-direction: column; }
             .hero-split-text { text-align: center; }
-              .hero {
-            position: relative;
-            min-height: 10vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            overflow: hidden;
-        }
+            .hero { min-height: 10vh; }
         }
     </style>
 </head>
@@ -155,7 +173,6 @@
     </nav>
 </header>
 
-<!-- Section HERO avec fondu enchaîné -->
 <section id="accueil" class="hero">
     <div class="hero-bg current" id="bg-current"></div>
     <div class="hero-bg next" id="bg-next"></div>
@@ -208,6 +225,10 @@
     <p class="text-center" style="font-size:0.7rem; opacity:0.5;">© 2026 Guiguille Traiteur Style - Tous droits réservés.</p>
 </footer>
 
+<a href="https://wa.me/781921199" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
 <script>
     // ---------- FONDU ENCHAÎNÉ (CROSSFADE) ----------
     const images = [
@@ -225,7 +246,6 @@
     const currentBg = document.getElementById('bg-current');
     const nextBg = document.getElementById('bg-next');
 
-    // Initialisation : mettre la première image
     if (currentBg && images.length) {
         currentBg.style.backgroundImage = `url('${images[0]}')`;
         nextBg.style.backgroundImage = `url('${images[1 % images.length]}')`;
@@ -236,33 +256,24 @@
     function startFade() {
         if (isTransitioning) return;
         isTransitioning = true;
-
-        // Préparer l'image suivante
         nextIndex = (currentIndex + 1) % images.length;
         nextBg.style.backgroundImage = `url('${images[nextIndex]}')`;
-
-        // Lancer le fondu : l'image next devient visible, current s'efface
         nextBg.style.opacity = "1";
         currentBg.style.opacity = "0";
 
-        // Après la transition, inverser les rôles (swap)
         setTimeout(() => {
-            // Échanger les classes ou les références : on permute le contenu des divs
-            // Méthode simple : recopier l'url de next vers current, et remettre next à opacity 0
             const nextUrl = nextBg.style.backgroundImage;
             currentBg.style.backgroundImage = nextUrl;
             currentBg.style.opacity = "1";
             nextBg.style.opacity = "0";
-            
             currentIndex = nextIndex;
             isTransitioning = false;
-        }, 1200); // doit correspondre à la durée de transition CSS (1.2s)
+        }, 1200);
     }
 
-    // Lancer le cycle toutes les 5 secondes
     setInterval(startFade, 5000);
 
-    // ---------- MENU HAMBURGER SIMPLIFIÉ ----------
+    // ---------- MENU HAMBURGER ----------
     const toggle = document.getElementById('mobile-menu');
     const nav = document.getElementById('nav-menu');
     
